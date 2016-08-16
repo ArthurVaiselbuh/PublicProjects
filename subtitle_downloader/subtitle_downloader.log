@@ -1,0 +1,95 @@
+INFO:root:Begin getting subtitles for:/home/arthur/Videos/Series/SV/Silicon.Valley.S03E08.HDTV.x264-KILLERS[ettv]/Silicon.Valley.S03E08.HDTV.x264-KILLERS[ettv].mkv' 
+INFO:root:Finished getting subtitles for /home/arthur/Videos/Series/SV/Silicon.Valley.S03E08.HDTV.x264-KILLERS[ettv]/Silicon.Valley.S03E08.HDTV.x264-KILLERS[ettv].mkv' . result:0/0
+DEBUG:root:Running for paths:["/home/arthur/Videos/Series/SV/Silicon.Valley.S03E08.HDTV.x264-KILLERS[ettv]/Silicon.Valley.S03E08.HDTV.x264-KILLERS[ettv].mkv' "]
+INFO:root:Begin getting subtitles for:/home/arthur/Videos/Series/SV/Silicon.Valley.S03E08.HDTV.x264-KILLERS[ettv]/Silicon.Valley.S03E08.HDTV.x264-KILLERS[ettv].mkv' 
+INFO:root:Finished getting subtitles for /home/arthur/Videos/Series/SV/Silicon.Valley.S03E08.HDTV.x264-KILLERS[ettv]/Silicon.Valley.S03E08.HDTV.x264-KILLERS[ettv].mkv' . result:0/0
+DEBUG:root:Running for paths:['/home/arthur/Videos/Series/SV/Silicon.Valley.S03E08.HDTV.x264-KILLERS[ettv]/Silicon.Valley.S03E08.HDTV.x264-KILLERS[ettv].mkv']
+INFO:root:Begin getting subtitles for:/home/arthur/Videos/Series/SV/Silicon.Valley.S03E08.HDTV.x264-KILLERS[ettv]/Silicon.Valley.S03E08.HDTV.x264-KILLERS[ettv].mkv
+DEBUG:root:New filename for subtitle is:'/home/arthur/Videos/Series/SV/Silicon.Valley.S03E08.HDTV.x264-KILLERS[ettv]/Silicon.Valley.S03E08.HDTV.x264-KILLERS[ettv].srt'
+INFO:urllib3.connectionpool:Starting new HTTP connection (1): dl.opensubtitles.org
+DEBUG:urllib3.connectionpool:Setting read timeout to None
+DEBUG:urllib3.connectionpool:"GET /en/download/src-api/vrf-19de0c5f/sid-5iqaaog23q2ak6nvi66bgu8ok0/filead/1954696059.gz HTTP/1.1" 200 None
+DEBUG:root:Running for paths:['/home/arthur/Videos/Series/SV/Silicon.Valley.S03E08.HDTV.x264-KILLERS[ettv]/Silicon.Valley.S03E08.HDTV.x264-KILLERS[ettv].mkv']
+INFO:root:Begin getting subtitles for:/home/arthur/Videos/Series/SV/Silicon.Valley.S03E08.HDTV.x264-KILLERS[ettv]/Silicon.Valley.S03E08.HDTV.x264-KILLERS[ettv].mkv
+DEBUG:root:New filename for subtitle is:'/home/arthur/Videos/Series/SV/Silicon.Valley.S03E08.HDTV.x264-KILLERS[ettv]/Silicon.Valley.S03E08.HDTV.x264-KILLERS[ettv].srt'
+INFO:urllib3.connectionpool:Starting new HTTP connection (1): dl.opensubtitles.org
+DEBUG:urllib3.connectionpool:Setting read timeout to None
+DEBUG:urllib3.connectionpool:"GET /en/download/src-api/vrf-19c40c5c/sid-9s8glml4l6lhrunvrmkq9uu9s1/filead/1955236686.gz HTTP/1.1" 200 None
+DEBUG:root:Running for paths:['/home/arthur/Videos/Series/SV/Silicon.Valley.S03E08.HDTV.x264-KILLERS[ettv]/Silicon.Valley.S03E08.HDTV.x264-KILLERS[ettv].mkv']
+INFO:root:Begin getting subtitles for:/home/arthur/Videos/Series/SV/Silicon.Valley.S03E08.HDTV.x264-KILLERS[ettv]/Silicon.Valley.S03E08.HDTV.x264-KILLERS[ettv].mkv
+DEBUG:root:New filename for subtitle is:'/home/arthur/Videos/Series/SV/Silicon.Valley.S03E08.HDTV.x264-KILLERS[ettv]/Silicon.Valley.S03E08.HDTV.x264-KILLERS[ettv].srt'
+INFO:urllib3.connectionpool:Starting new HTTP connection (1): dl.opensubtitles.org
+DEBUG:root:Running for paths:['/home/arthur/Videos/Series/SV']
+INFO:root:Begin getting subtitles for:/home/arthur/Videos/Series/SV
+DEBUG:root:Working in folder:/home/arthur/Videos/Series/SV
+DEBUG:root:Working in folder:/home/arthur/Videos/Series/SV/Silicon.Valley.S03E09.HDTV.x264-KILLERS[ettv]
+DEBUG:root:New filename for subtitle is:'/home/arthur/Videos/Series/SV/Silicon.Valley.S03E09.HDTV.x264-KILLERS[ettv]/Silicon.Valley.S03E09.HDTV.x264-KILLERS[ettv].srt'
+INFO:urllib3.connectionpool:Starting new HTTP connection (1): dl.opensubtitles.org
+DEBUG:urllib3.connectionpool:Setting read timeout to None
+DEBUG:urllib3.connectionpool:"GET /en/download/src-api/vrf-19aa0c52/sid-568ahhgq2eeah9ehnldtgr4g66/filead/1955242607.gz HTTP/1.1" 200 None
+DEBUG:root:Working in folder:/home/arthur/Videos/Series/SV/Silicon.Valley.S03E08.HDTV.x264-KILLERS[ettv]
+DEBUG:root:New filename for subtitle is:'/home/arthur/Videos/Series/SV/Silicon.Valley.S03E08.HDTV.x264-KILLERS[ettv]/Silicon.Valley.S03E08.HDTV.x264-KILLERS[ettv].srt'
+INFO:urllib3.connectionpool:Starting new HTTP connection (1): dl.opensubtitles.org
+DEBUG:urllib3.connectionpool:Setting read timeout to None
+DEBUG:urllib3.connectionpool:"GET /en/download/src-api/vrf-19c40c5c/sid-568ahhgq2eeah9ehnldtgr4g66/filead/1955236686.gz HTTP/1.1" 200 None
+DEBUG:root:Working in folder:/home/arthur/Videos/Series/SV/Silicon.Valley.S03E10.PROPER.HDTV.x264-KILLERS[ettv]
+DEBUG:root:New filename for subtitle is:'/home/arthur/Videos/Series/SV/Silicon.Valley.S03E10.PROPER.HDTV.x264-KILLERS[ettv]/Silicon.Valley.S03E10.PROPER.HDTV.x264-KILLERS[ettv].srt'
+INFO:urllib3.connectionpool:Starting new HTTP connection (1): dl.opensubtitles.org
+DEBUG:urllib3.connectionpool:Setting read timeout to None
+DEBUG:urllib3.connectionpool:"GET /en/download/src-api/vrf-19c80c59/sid-568ahhgq2eeah9ehnldtgr4g66/filead/1955248653.gz HTTP/1.1" 200 None
+INFO:root:Finished getting subtitles for /home/arthur/Videos/Series/SV. result:3/3
+INFO:root:Running for paths:['/home/arthur/Videos/Series/SV']
+INFO:root:Begin getting subtitles for:/home/arthur/Videos/Series/SV
+DEBUG:root:Working in folder:/home/arthur/Videos/Series/SV
+DEBUG:root:Working in folder:/home/arthur/Videos/Series/SV/Silicon.Valley.S03E09.HDTV.x264-KILLERS[ettv]
+INFO:root:Running for paths:['/home/arthur/Videos/Series/SV']
+INFO:root:Begin getting subtitles for:/home/arthur/Videos/Series/SV
+DEBUG:root:Working in folder:/home/arthur/Videos/Series/SV
+DEBUG:root:Working in folder:/home/arthur/Videos/Series/SV/Silicon.Valley.S03E09.HDTV.x264-KILLERS[ettv]
+DEBUG:root:Working in folder:/home/arthur/Videos/Series/SV/Silicon.Valley.S03E08.HDTV.x264-KILLERS[ettv]
+DEBUG:root:Working in folder:/home/arthur/Videos/Series/SV/Silicon.Valley.S03E10.PROPER.HDTV.x264-KILLERS[ettv]
+INFO:root:Finished getting subtitles for /home/arthur/Videos/Series/SV. result:0/3
+INFO:root:Finished. Downloaded 0/3.
+INFO:root:Running for paths:['/home/arthur/Videos/Series/SV']
+INFO:root:Begin getting subtitles for:/home/arthur/Videos/Series/SV
+DEBUG:root:Working in folder:/home/arthur/Videos/Series/SV
+DEBUG:root:Working in folder:/home/arthur/Videos/Series/SV/Silicon.Valley.S03E09.HDTV.x264-KILLERS[ettv]
+DEBUG:root:Working in folder:/home/arthur/Videos/Series/SV/Silicon.Valley.S03E08.HDTV.x264-KILLERS[ettv]
+DEBUG:root:Working in folder:/home/arthur/Videos/Series/SV/Silicon.Valley.S03E10.PROPER.HDTV.x264-KILLERS[ettv]
+INFO:root:Finished getting subtitles for /home/arthur/Videos/Series/SV. result:0/3
+INFO:root:Finished. Downloaded 0/3.
+INFO:root:Running for paths:['/home/arthur/Videos/Series/SV']
+INFO:root:Begin getting subtitles for:/home/arthur/Videos/Series/SV
+DEBUG:root:Working in folder:/home/arthur/Videos/Series/SV
+DEBUG:root:Working in folder:/home/arthur/Videos/Series/SV/Silicon.Valley.S03E09.HDTV.x264-KILLERS[ettv]
+INFO:root:Running for paths:['/home/arthur/Videos/Series/SV']
+INFO:root:Begin getting subtitles for:/home/arthur/Videos/Series/SV
+DEBUG:root:Working in folder:/home/arthur/Videos/Series/SV
+DEBUG:root:Working in folder:/home/arthur/Videos/Series/SV/Silicon.Valley.S03E09.HDTV.x264-KILLERS[ettv]
+DEBUG:root:Working in folder:/home/arthur/Videos/Series/SV/Silicon.Valley.S03E08.HDTV.x264-KILLERS[ettv]
+ERROR:root:Unexpected error in function get_subtitles_for_file: 
+ERROR:root:Unexpected error in function get_subtitles_for_file: 
+DEBUG:root:Working in folder:/home/arthur/Videos/Series/SV/Silicon.Valley.S03E10.PROPER.HDTV.x264-KILLERS[ettv]
+DEBUG:root:New filename for subtitle is:'/home/arthur/Videos/Series/SV/Silicon.Valley.S03E10.PROPER.HDTV.x264-KILLERS[ettv]/Silicon.Valley.S03E10.PROPER.HDTV.x264-KILLERS[ettv].srt'
+INFO:urllib3.connectionpool:Starting new HTTP connection (1): dl.opensubtitles.org
+DEBUG:urllib3.connectionpool:Setting read timeout to None
+DEBUG:urllib3.connectionpool:"GET /en/download/src-api/vrf-19d30c5e/sid-ec3f9trppf8u127i3640gf9lb5/filead/1955248793.gz HTTP/1.1" 200 None
+INFO:root:Finished getting subtitles for /home/arthur/Videos/Series/SV. result:1/3
+INFO:root:Finished. Downloaded 1/3.
+INFO:root:Running for paths:['/home/arthur/Videos/Series/SV']
+INFO:root:Begin getting subtitles for:/home/arthur/Videos/Series/SV
+DEBUG:root:Working in folder:/home/arthur/Videos/Series/SV
+DEBUG:root:Working in folder:/home/arthur/Videos/Series/SV/Silicon.Valley.S03E09.HDTV.x264-KILLERS[ettv]
+DEBUG:root:Working in folder:/home/arthur/Videos/Series/SV/Silicon.Valley.S03E08.HDTV.x264-KILLERS[ettv]
+DEBUG:root:Working in folder:/home/arthur/Videos/Series/SV/Silicon.Valley.S03E10.PROPER.HDTV.x264-KILLERS[ettv]
+ERROR:root:Unexpected error in function get_subtitles_for_file: 
+DEBUG:root:New filename for subtitle is:'/home/arthur/Videos/Series/SV/Silicon.Valley.S03E09.HDTV.x264-KILLERS[ettv]/Silicon.Valley.S03E09.HDTV.x264-KILLERS[ettv].srt'
+INFO:urllib3.connectionpool:Starting new HTTP connection (1): dl.opensubtitles.org
+DEBUG:root:New filename for subtitle is:'/home/arthur/Videos/Series/SV/Silicon.Valley.S03E10.PROPER.HDTV.x264-KILLERS[ettv]/Silicon.Valley.S03E10.PROPER.HDTV.x264-KILLERS[ettv].srt'
+INFO:urllib3.connectionpool:Starting new HTTP connection (1): dl.opensubtitles.org
+DEBUG:urllib3.connectionpool:Setting read timeout to None
+DEBUG:urllib3.connectionpool:Setting read timeout to None
+DEBUG:urllib3.connectionpool:"GET /en/download/src-api/vrf-19aa0c52/sid-6hkhhdufrpvrm5re8aen45uqf6/filead/1955242607.gz HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:"GET /en/download/src-api/vrf-19c80c59/sid-6hkhhdufrpvrm5re8aen45uqf6/filead/1955248653.gz HTTP/1.1" 200 None
+INFO:root:Finished getting subtitles for /home/arthur/Videos/Series/SV. result:2/3
+INFO:root:Finished. Downloaded 2/3.

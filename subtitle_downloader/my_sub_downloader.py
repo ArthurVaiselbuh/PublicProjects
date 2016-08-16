@@ -6,6 +6,8 @@ import hashlib
 import requests
 import gzip
 import argparse
+import time
+import traceback
 from io import BytesIO
 from ReturnThread import ReturnThread
 
@@ -22,7 +24,7 @@ def log_error(func):
         try:
             return func(*args, **kwargs)
         except Exception as e:
-            logging.error("Unexpected error in function {}: {}".format(func.__name__, e))
+            logging.error(traceback.format_exc())
     return wrapper
 
 def get_file_hash_and_size(path, hash_size=64*1024):
@@ -108,6 +110,8 @@ class SubtitleDownloader(object):
         Find and download data for subtitles for given filepath.
         Output file will be filepath - extention + .srt
         """
+        #hold proxy for it's own to allow multithreading
+        proxy = xmlrpclib.ServerProxy(self.OPEN_SUBTITLES_API_URL)
         if lang is None:
             lang = self.LANGUAGE
         file_hash, bytesize = get_file_hash_and_size(filepath)
@@ -118,7 +122,7 @@ class SubtitleDownloader(object):
                             moviebytesize=bytesize,
                             sublanguageid=lang
                             ))
-            response = self.proxy.SearchSubtitles(self.token, params)
+            response = proxy.SearchSubtitles(self.token, params)
             data = response['data']
             if data == []:
                 logging.warning("No subtitles found for '{}'".format(filepath))
@@ -146,6 +150,8 @@ VIDEO_EXTENTIONS = ['3g2', '3gp', '3gp2', '3gpp', '60d', 'ajp', 'asf', 'asx', 'a
 
 if __name__ == "__main__":
     logging.basicConfig(filename="subtitle_downloader.log", level=logging.DEBUG)
+    logging.getLogger().addHandler(logging.StreamHandler())
+    logging.info("Begin running at:{}".format(time.ctime()))
     
     ap = argparse.ArgumentParser(description='Download subtitles for directory/video.')
     ap.add_argument('-l', default='eng', help='language of subtitles', dest='lang')

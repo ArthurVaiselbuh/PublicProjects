@@ -1,5 +1,4 @@
 #!/usr/bin/python
-import xmlrpclib
 import logging
 import os, sys
 import hashlib
@@ -18,6 +17,10 @@ OSUB_AGENT = "OSTestUserAgent"
 #python3 compatibility
 if sys.version.startswith("3"):
     raw_input = input
+    from xmlrpc import client
+    xmlrpclib = client
+else:
+    import xmlrpclib
 
 def log_error(func):
     def wrapper(*args, **kwargs):

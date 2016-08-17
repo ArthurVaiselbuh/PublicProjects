@@ -108,7 +108,7 @@ class SubtitleDownloader(object):
         return ret
 
     @log_error
-    def get_subtitles_for_file(self, filepath, lang=None):
+    def get_subtitles_for_file(self, filepath, lang=None, sec_lang=None):
         """
         Find and download data for subtitles for given filepath.
         Output file will be filepath - extention + .srt
@@ -117,6 +117,8 @@ class SubtitleDownloader(object):
         proxy = xmlrpclib.ServerProxy(self.OPEN_SUBTITLES_API_URL)
         if lang is None:
             lang = self.LANGUAGE
+        elif sec_lang is None:
+            sec_lang = self.LANGUAGE
         file_hash, bytesize = get_file_hash_and_size(filepath)
         if self.site == 1:
             params = []
@@ -124,12 +126,18 @@ class SubtitleDownloader(object):
                             moviehash=file_hash,
                             moviebytesize=bytesize,
                             sublanguageid=lang
-                            ))
+                        ))
             response = proxy.SearchSubtitles(self.token, params)
             data = response['data']
             if data == []:
-                logging.warning("No subtitles found for '{}'".format(filepath))
-                return False
+                if sec_lang is not None and sec_lang != lang:
+                    logging.info("Attempting secondary language '{}' for {}".format(sec_lang, filepath))
+                    params[0]['sublanguageid'] = sec_lang
+                    response = proxy.SearchSubtitles(self.token, params)
+                    data = response['data']
+                    if data == []:
+                        logging.warning("No subtitles found for '{}'".format(filepath))
+                        return False
             url = data[0]['SubDownloadLink']
             extention = data[0]['SubFileName'].rsplit(".", 1)[1]
             new_filename = os.path.join(os.path.dirname(filepath), os.path.basename(filepath).rsplit(".", 1)[0] + "." + extention)
@@ -142,7 +150,7 @@ class SubtitleDownloader(object):
                     gz = gzip.GzipFile(fileobj=bio)
                     fl.write(gz.read())
             except Exception as e:
-                logging.error("Error unpacking gzip or writing file:{}".format(e))
+                logging.error("Error unpacking gzip or writing file:\n{}".format(traceback.format_exc()))
             return True
         return False
 

@@ -15,3 +15,11 @@ class ReturnThread(threading.Thread):
     def join(self, timeout=None):
         super(ReturnThread, self).join(timeout)
         return self._return_val
+
+    @property
+    def args(self):
+        return self._args
+
+    @property
+    def kwargs(self):
+        return self._kwargs

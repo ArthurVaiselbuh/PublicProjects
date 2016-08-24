@@ -11,9 +11,11 @@ import credentials
 OS_FNAME_LIMIT = 140
 
 def remove_empty_folders(path):
-    to_del = []
-    for dirpath, dirnames, filenames in os.walk(path):
-        pass
+    for dirpath, dirnames, filenames in os.walk(path, topdown=False):
+        if not dirnames and not filenames:
+            # Empty folder
+            logging.info("Removing dir:{}".format(dirpath))
+            os.rmdir(dirpath)
 
 def find_free_name(basepath, name, limit=OS_FNAME_LIMIT):
     """
@@ -157,7 +159,9 @@ if __name__ == '__main__':
     logging.getLogger().addHandler(logging.StreamHandler())
     logging.info("Begin running at:{}".format(time.ctime()))
 
+    basepath = '/home/arthur/Projects/tau_downloader/testall'
     t = TauHandler()
     t.login(credentials)
-    t.download_all_files('/home/arthur/Projects/tau_downloader/testall')
+    t.download_all_files(basepath)
+    remove_empty_folders(basepath)
 

@@ -1,10 +1,41 @@
 #!/usr/bin/python3
 import requests
 import os
+import logging
+import time
 from bs4 import BeautifulSoup
 
 import credentials
-from bs4 import BeautifulSoup
+
+# file length limit due to os limits
+OS_FNAME_LIMIT = 140
+
+def remove_empty_folders(path):
+    to_del = []
+    for dirpath, dirnames, filenames in os.walk(path):
+        pass
+
+def find_free_name(basepath, name, limit=OS_FNAME_LIMIT):
+    """
+    Find free file/path name for creating a new dir/file.
+    limit is max length of final path.
+    Return final path.
+    """
+    # this is linux, remove /
+    name = name.replace("/", '')
+    full = os.path.join(basepath, name)
+    if (not os.path.exists(full)) and len(full) <= limit:
+        return full
+    if len(full) >= limit - 1:
+        diff = len(full) + 1 - limit
+        name = name[:-diff]
+    idx = 0
+    while os.path.exists(os.path.join(basepath, name + "{}".format(idx))):
+        idx += 1
+        if idx % 10 == 0 and len(os.path.join(basepath, name+"{}".format(idx))) > limit:
+            name = name[:-1]
+    return os.path.join(basepath, "{}{}".format(name, idx))
+
 
 class TauHandler(object):
     def __init__(self):
@@ -56,7 +87,7 @@ class TauHandler(object):
         submit_addr = form.attrs['action'] # need encoding type?
         #finally post!
         self.last_resp = self.post(submit_addr, data=data)
-        self.logged_in = self.last_resp.url == 'http://moodle.tau.ac.il'
+        self.logged_in = self.last_resp.url.strip('/ ') == 'http://moodle.tau.ac.il'
         return self.logged_in
 
     def get(self, *args, **kwargs):
@@ -72,41 +103,48 @@ class TauHandler(object):
         assert self.logged_in
         moodle = self.get("http://moodle.tau.ac.il")
         bs = BeautifulSoup(moodle.text, 'lxml')
-        courses = bs.findAll(attrs={'class':'courselink'})
+        courses = bs.findAll(attrs={'class': 'courselink'})
         for course in courses:
             link = course.find("a")
             if not link:
-                #no link, nothing to download
+                # no link, nothing to download
                 continue
-            #Create dir with course name.
-            name = course.text + "_0"
-            idx = 0
-            while os.path.exists(os.path.join(basedir, name)):
-                idx += 1
-                name = name[:-1] + idx
+            name = course.text
+            # if dir exists skip course
+            if os.path.exists(os.path.join(basedir, name)):
+                logging.info("Skipping course {}, dir already exists".format(name))
+                continue
             os.mkdir(os.path.join(basedir, name))
             self.download_course(link.attrs['href'], os.path.join(basedir, name))
 
     def download_course(self, url, path):
         """Folder must be empty or stuff could get overwritten"""
+        logging.info("Begin downloading course from url {} to: {}".format(url, path))
         self.last_resp = self.get(url)
         bs = BeautifulSoup(self.last_resp.text, 'lxml')
-        content = bs.find(attrs={'class':'course-content'})
-        sections = content.findAll(attrs={'class':'content'})
-        for section in sections.findAll("li"):
-            if section.id == 'section-0':
-                # Skip general stuff
+        content = bs.find(attrs={'class': 'course-content'})
+        sections = content.findAll(attrs={'class': 'content'})
+        for section in sections:
+            node = section.find(attrs={'class': 'sectionname'})
+            if node is None:
+                logging.warning('Did not find section name for section id "{}"'.format(section.id))
                 continue
-            name = section.find(attrs={'class':'sectionname'}).text
-            section_dir = os.path.join(path, name)
+            name = node.text
+            section_dir = find_free_name(path, name)
             os.mkdir(section_dir)
             for link in section.findAll("a"):
-                flname = link.find(attrs={'class':'instancename'}).text
-                self.download_file(link.attrs['href'] + '&redirect=1', os.path.join(section_dir, flname))
-
+                node = link.find(attrs={'class': 'instancename'})
+                if node is None:
+                    logging.warning("No name found for {}".format(link.attrs['href']))
+                    continue
+                flname = node.text
+                flpath = find_free_name(section_dir, flname)
+                self.download_file(link.attrs['href'] + '&redirect=1', flpath)
+        logging.info("Finished downloading course to {}".format(path))
 
     def download_file(self, url, filename):
         resp = self.get(url, stream=True)
+        logging.info("Downloading file: {}")
         with open(filename, 'wb') as fl:
             for chunk in resp.iter_content(chunk_size=1024):
                 if chunk:  # filter out keep-alive new chunks
@@ -115,8 +153,11 @@ class TauHandler(object):
 
 
 if __name__ == '__main__':
+    logging.basicConfig(filename="tau_downloader.log", level=logging.INFO)
+    logging.getLogger().addHandler(logging.StreamHandler())
+    logging.info("Begin running at:{}".format(time.ctime()))
+
     t = TauHandler()
     t.login(credentials)
-    t.download_course('http://moodle.tau.ac.il/course/view.php?id=509182998',
-                      '/home/arthur/Projects/tau_downloader/test')
+    t.download_all_files('/home/arthur/Projects/tau_downloader/testall')
 

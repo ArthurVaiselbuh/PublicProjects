@@ -1,7 +1,6 @@
 #!/usr/bin/python3
-
 from handler import keylistener, start as h_start
-import xerox
+import copy_handler
 
 
 class KeyboardHandler:
@@ -11,7 +10,7 @@ class KeyboardHandler:
         self.cur_clip = 1
         for i in range(10):
             # This default assignment is necessary due to how python handles func definition
-            def tmp(i=i):
+            def tmp(i=i):   
                 self.change_clip(i)
             self.keylistener.addKeyListener("L_CTRL+L_ALT+{}".format(i), tmp)
 
@@ -19,11 +18,13 @@ class KeyboardHandler:
         """
         changes current clip to clip.
         """
-        #print("Changing clip to", clip)
+        print("Changing clip to", clip)
         # first copy contents of current clip to the array
-        self.clips[self.cur_clip] = xerox.paste()
+        data = copy_handler.paste()
+        self.clips[self.cur_clip] = data
+        print("Recoverd clip:", data)
         # now change to new one
-        xerox.copy(self.clips[clip])
+        copy_handler.copy(self.clips[clip])
         self.cur_clip = clip
 
     def start(self):
@@ -32,9 +33,3 @@ class KeyboardHandler:
 if __name__ == "__main__":
     h = KeyboardHandler()
     h.start()
-
-
-
-
-
-

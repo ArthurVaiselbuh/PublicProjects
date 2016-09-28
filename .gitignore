@@ -3,3 +3,4 @@ Unity
 *token*
 *.pyc
 .idea
+*.log

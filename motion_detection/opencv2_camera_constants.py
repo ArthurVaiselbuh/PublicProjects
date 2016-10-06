@@ -1,0 +1,23 @@
+class CAMERA_CONSTANTS(object):
+    POS_MSEC = 0  #Current position of the video file in milliseconds.
+    POS_FRAMES = 1  #0-based index of the frame to be decoded/captured next.
+    POS_AVI_RATIO = 2  #Relative position of the video file: 0 - start of the film, 1 - end of the film.
+    FRAME_WIDTH = 3  #Width of the frames in the video stream.
+    FRAME_HEIGHT = 4  #Height of the frames in the video stream.
+    FPS = 5  #Frame rate.
+    FOURCC = 6  #4-character code of codec.
+    FRAME_COUNT = 7  #Number of frames in the video file.
+    FORMAT = 8  #Format of the Mat objects returned by retrieve() .
+    MODE = 9  #Backend-specific value indicating the current capture mode.
+    BRIGHTNESS = 10  #Brightness of the image (only for cameras).
+    CONTRAST = 11  #Contrast of the image (only for cameras).
+    SATURATION = 12  #Saturation of the image (only for cameras).
+    HUE = 13  #Hue of the image (only for cameras).
+    GAIN = 14  #Gain of the image (only for cameras).
+    EXPOSURE = 15  #Exposure (only for cameras).
+    CONVERT_RGB = 16  #Boolean flags indicating whether images should be converted to RGB.
+    WHITE_BALANCE_U = 17  #The U value of the whitebalance setting (note: only supported by DC1394 v 2.x backend currently)
+    WHITE_BALANCE_V = 18  #The V value of the whitebalance setting (note: only supported by DC1394 v 2.x backend currently)
+    RECTIFICATION = 19  #Rectification flag for stereo cameras (note: only supported by DC1394 v 2.x backend currently)
+    ISO_SPEED = 20  #The ISO speed of the camera (note: only supported by DC1394 v 2.x backend currently)
+    BUFFERSIZE = 21  #Amount of frames stored in internal buffer memory (note: only supported by DC1394 v 2.x backend currently)

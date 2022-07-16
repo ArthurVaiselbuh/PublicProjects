@@ -29,7 +29,8 @@ namespace DotNetChat // Note: actual namespace depends on the project name.
                 log.Info("Running as client");
                 sock = await GetSocket(false);
             }
-            Chat chat = new Chat(sock);
+            var networkStream = new NetworkStream(sock);
+            Chat chat = new Chat(networkStream);
             var readTask = Task.Factory.StartNew(() => ReadLoop(chat));
             var writeTask = Task.Factory.StartNew(() => WriteLoop(chat));
             Task.WaitAll(readTask, writeTask);

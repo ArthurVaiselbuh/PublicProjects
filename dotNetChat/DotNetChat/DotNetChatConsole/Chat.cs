@@ -11,7 +11,9 @@ namespace DotNetChatConsole
 {
     internal class ChatMessage
     {
-        private int messageSize;
+        private static log4net.ILog log = log4net.LogManager.GetLogger(nameof(ChatMessage));
+
+        private int contentSize;
         private byte[]? message = null;
 
         public byte[] MessageBytes {get=> message!; }
@@ -21,7 +23,7 @@ namespace DotNetChatConsole
         public byte[] ToBytes()
         {
             using var memoryStream = new MemoryStream();
-            memoryStream.Write(BitConverter.GetBytes(IPAddress.HostToNetworkOrder(messageSize)));
+            memoryStream.Write(BitConverter.GetBytes(IPAddress.HostToNetworkOrder(contentSize)));
             memoryStream.Write(message);
             return memoryStream.ToArray();
            
@@ -30,17 +32,18 @@ namespace DotNetChatConsole
         public static ChatMessage FromBytes(byte[] bytes)
         {
             ChatMessage result = new ChatMessage();
-            result.messageSize = IPAddress.NetworkToHostOrder(BitConverter.ToInt32(bytes));
-            var size = result.messageSize - sizeof(int);
-            result.message = new byte[size];
-            Array.Copy(bytes, sizeof(int), result.message, 0, size);
+            var contentSize = IPAddress.NetworkToHostOrder(BitConverter.ToInt32(bytes));
+            //log.Debug($"Attempting to construct message with content size: {contentSize}");
+            result.contentSize = contentSize;
+            result.message = new byte[contentSize];
+            Array.Copy(bytes, sizeof(int), result.message, 0, contentSize);
             return result;
         }
         
         public static ChatMessage GetMessageFromString(string message)
         {
             var encodedMessage = Encoding.UTF8.GetBytes(message);
-            ChatMessage chatMessage =new ChatMessage { message = encodedMessage, messageSize = encodedMessage.Length + sizeof(int) };
+            ChatMessage chatMessage =new ChatMessage { message = encodedMessage, contentSize = encodedMessage.Length };
             return chatMessage; 
         }
     }
@@ -48,25 +51,26 @@ namespace DotNetChatConsole
     internal class Chat
     {
         private static log4net.ILog log = log4net.LogManager.GetLogger(nameof(Chat));
-        private Socket socket;
-        public Chat(Socket socket)
+        private NetworkStream connectionStream;
+        public Chat(NetworkStream stream)
         {
-            this.socket = socket;
+            this.connectionStream = stream;
         }
 
         public async Task SendChatMessage(string message)
         {
             var encodedMessage = Encoding.UTF8.GetBytes(message);
-            log.Debug($"Sending message: <{message}>, encoded length: {encodedMessage.Length}, encoded is: {encodedMessage}");
+            log.Debug($"Sending message: <{message}>, encoded length: {encodedMessage.Length}");
             var chatMessage = ChatMessage.GetMessageFromString(message);
-            var bytesSent = await socket.SendAsync(chatMessage.ToBytes(), SocketFlags.None);
+            var bytesToSend = chatMessage.ToBytes();
+            await connectionStream.WriteAsync(bytesToSend, 0, bytesToSend.Length);
         }
 
         public async Task<string> ReadChatMessage()
         {
             log.Debug("Waiting on message from socket");
             var bytes = await ReadFullMessageFromSocket();
-            log.Debug("Read full message");
+            log.Debug("Finished reading full message");
             var chatMessage = ChatMessage.FromBytes(bytes);
             var decodedMessage = Encoding.UTF8.GetString(chatMessage.MessageBytes);
             log.Debug($"Received decoded message: {decodedMessage}");
@@ -76,12 +80,16 @@ namespace DotNetChatConsole
         private async Task<byte[]> ReadFullMessageFromSocket()
         {
             var bytes = new byte[1024];
-            var recvSize = await socket.ReceiveAsync(bytes, SocketFlags.None);
-            var size = IPAddress.NetworkToHostOrder(BitConverter.ToInt32(bytes));
-            if (size != recvSize)
+            await connectionStream.ReadAsync(bytes, 0, sizeof(int));
+            var contentSize = IPAddress.NetworkToHostOrder(BitConverter.ToInt32(bytes));
+            if (contentSize > bytes.Length)
             {
-                throw new NotImplementedException("Not handling long messages for now");
+                var newBytes = new byte[contentSize];
+                Array.Copy(bytes, 0, destinationArray: newBytes, 0, sizeof(int));
+                bytes = newBytes;
             }
+
+            await connectionStream.ReadAsync(bytes, sizeof(int), contentSize);
             return bytes;
         }
 

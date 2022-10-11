@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "TaskKill": {
+      "commandName": "Project",
+      "commandLineArgs": "5512"
+    }
+  }
+}

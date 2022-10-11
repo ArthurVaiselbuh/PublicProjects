@@ -1,0 +1,2 @@
+Simple windows (c++ and c#) projects to kill a process. 
+Allows non-admin to kill admin process (in the same session)
